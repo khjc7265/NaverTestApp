@@ -79,10 +79,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private CoordinatorLayout mainContent;
-    public RelativeLayout detailImageView;
-    public ImageView detailImage;
-    public ImageView goRight;
-    public ImageView goLeft;
+    private RelativeLayout detailImageView;
+    private ImageView detailImage;
+    private ImageView goRight;
+    private ImageView goLeft;
+    private RelativeLayout clear;
 
     private boolean isBackPressed;
     MyHandler mHandler;
@@ -104,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         detailImage = findViewById(R.id.detailImage);
         goRight = findViewById(R.id.goRight);
         goLeft = findViewById(R.id.goLeft);
+        clear = findViewById(R.id.clear);
 
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -127,6 +129,12 @@ public class MainActivity extends AppCompatActivity {
         etSearch = findViewById(R.id.etSearch);
         etSearch.setOnEditorActionListener(editorActionListener);
 
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                etSearch.setText("");
+            }
+        });
 
         if (savedInstanceState != null) {
             String keyword = savedInstanceState.getString(SEARCH_KEYWORD);

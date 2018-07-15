@@ -38,9 +38,8 @@ public class SearchManager extends BaseApiService {
     }
 
 
-
     public void searchImage(String keyword, String sort, int start, int display, final GetTaskCallBack<List<Image>> callBack) {
-        Call<JsonObject> call = mSearchApi.getImages(keyword,sort,start, display);
+        Call<JsonObject> call = mSearchApi.getImages(keyword, sort, start, display);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -56,7 +55,9 @@ public class SearchManager extends BaseApiService {
                     if (statusCode == ResponseCodes.BAD_REQUEST.getCode()) {
                         try {
                             RestError restError = mRetrofitGenerator.responseError(response.errorBody());
-                            if (restError.getError_description().equals(ResponseCodes.PAGE_IS_MAX.getDesc())) {
+                            if (restError.getError_description() == null) {
+                                callBack.onDataNotAvailable(getResponse(statusCode));
+                            } else if (restError.getError_description().equals(ResponseCodes.PAGE_IS_MAX.getDesc())) {
                                 callBack.onDataNotAvailable(ResponseCodes.PAGE_IS_MAX);
                             } else if (restError.getError_description().equals(ResponseCodes.SIZE_IS_MAX.getDesc())) {
                                 callBack.onDataNotAvailable(ResponseCodes.SIZE_IS_MAX);
@@ -81,7 +82,7 @@ public class SearchManager extends BaseApiService {
     public void searchWeb(String keyword, int start, int display, final GetTaskCallBack<List<Web>> callBack) {
 
 
-        Call<JsonObject> call = mSearchApi.getWeb(keyword,start, display);
+        Call<JsonObject> call = mSearchApi.getWeb(keyword, start, display);
         call.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
@@ -97,7 +98,9 @@ public class SearchManager extends BaseApiService {
                     if (statusCode == ResponseCodes.BAD_REQUEST.getCode()) {
                         try {
                             RestError restError = mRetrofitGenerator.responseError(response.errorBody());
-                            if (restError.getError_description().equals(ResponseCodes.PAGE_IS_MAX.getDesc())) {
+                            if (restError.getError_description() == null) {
+                                callBack.onDataNotAvailable(getResponse(statusCode));
+                            } else if (restError.getError_description().equals(ResponseCodes.PAGE_IS_MAX.getDesc())) {
                                 callBack.onDataNotAvailable(ResponseCodes.PAGE_IS_MAX);
                             } else if (restError.getError_description().equals(ResponseCodes.SIZE_IS_MAX.getDesc())) {
                                 callBack.onDataNotAvailable(ResponseCodes.SIZE_IS_MAX);

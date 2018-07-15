@@ -11,8 +11,8 @@ public enum ResponseCodes {
     INTERNAL_SERVER_ERROR(500, "Internal Server Error"),
     SERVICE_UNAVAILABLE(503, "Service Unavailable"),
     CODE_UNKNOWN(10001, "Unknown Response Code"),
-    PAGE_IS_MAX(10002,"page is more than max"),
-    SIZE_IS_MAX(10003,"size is more than max");
+    PAGE_IS_MAX(10002,"Invalid start value"),
+    SIZE_IS_MAX(10003,"Invalid display value");
 
 
     private int code;

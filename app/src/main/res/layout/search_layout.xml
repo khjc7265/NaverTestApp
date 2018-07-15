@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/search_height"
     android:background="@drawable/border_bottom"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="horizontal">
+    android:focusableInTouchMode="true">
 
     <RelativeLayout
+        android:id="@+id/searchView"
         android:layout_width="38dp"
-        android:layout_marginEnd="4dp"
         android:layout_height="match_parent"
-        android:gravity="center_vertical|end"
+        android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
-        >
+        android:background="@android:color/white"
+        android:gravity="center_vertical|end">
 
         <ImageView
             android:layout_width="28dp"
@@ -22,21 +22,42 @@
 
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/clear"
+        android:layout_width="38dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:background="@android:color/white"
+        android:gravity="center_vertical|end">
+
+        <ImageView
+            android:layout_width="28dp"
+            android:layout_height="32dp"
+            android:src="@drawable/baseline_cancel_black_48" />
+    </RelativeLayout>
 
     <EditText
         android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/clear"
+        android:layout_toEndOf="@+id/searchView"
+        android:layout_toRightOf="@+id/searchView"
         android:background="@null"
         android:gravity="center_vertical"
         android:hint="@string/search_hint"
         android:imeOptions="actionSearch"
-        android:textStyle="bold"
         android:maxLength="50"
-        android:singleLine="true"
-        android:textSize="14dp"
-        android:selectAllOnFocus="true"
         android:maxLines="1"
-        android:textColorHint="#a4a4a4" />
-        <!--android:digits=".0123456789qwertzuiopasdfghjklyxcvbnm"-->
-</LinearLayout>
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:textColorHint="#a4a4a4"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:layout_toStartOf="@+id/clear" />
+
+
+</RelativeLayout>
