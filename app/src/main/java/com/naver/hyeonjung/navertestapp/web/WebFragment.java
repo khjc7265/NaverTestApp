@@ -55,7 +55,7 @@ public class WebFragment extends BaseFragment implements WebContract.View {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 LOG.d("onLoadMore");
-                offset = page;
+                offset = ((page - 1) * size) + 1;
                 mPresenter.search(mActivity.getKeyword(), offset, size);
             }
         };
@@ -98,7 +98,7 @@ public class WebFragment extends BaseFragment implements WebContract.View {
     }
 
     @Override
-    public Context getViewContext(){
+    public Context getViewContext() {
         return mActivity;
     }
 
@@ -147,7 +147,7 @@ public class WebFragment extends BaseFragment implements WebContract.View {
 
     public void search(String keyword) {
         mItems.clear();
-        mPresenter.search(keyword, 1,size);
+        mPresenter.search(keyword, 1, size);
     }
 
     private void goWebBrowser(String url) {

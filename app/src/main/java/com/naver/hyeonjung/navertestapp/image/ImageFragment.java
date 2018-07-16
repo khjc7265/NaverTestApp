@@ -10,6 +10,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.naver.hyeonjung.navertestapp.BusEvent.TransferData;
 import com.naver.hyeonjung.navertestapp.R;
 import com.naver.hyeonjung.navertestapp.base.BaseAdapter;
@@ -63,14 +64,14 @@ public class ImageFragment extends BaseFragment implements ImageContract.View {
 
         binding.list.setAdapter(mAdapter);
         binding.setItemList(mItems);
-         StaggeredGridLayoutManager layoutManager= new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         binding.list.setLayoutManager(layoutManager);
 
         endlessRecyclerViewScrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
                 LOG.d("onLoadMore");
-                offset = page;
+                offset = ((page - 1) * size) + 1;
                 mPresenter.search(mActivity.getKeyword(), sort.getType(), offset, size);
             }
         };
@@ -167,7 +168,7 @@ public class ImageFragment extends BaseFragment implements ImageContract.View {
     }
 
     void showImage(int position) {
-        mActivity.showImage(mItems,position);
+        mActivity.showImage(mItems, position);
     }
 
 }
